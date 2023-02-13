@@ -1,0 +1,16 @@
+class Solution {
+    public int countOdds(int low, int high) {
+        int c = 0;
+        if(low%2 != 0)
+        c++;
+        else{
+            low++;
+            c++;
+        }
+        while(low <= high) {
+            low = low + 2;
+            c++;
+        }
+        return c-1;
+    }
+}
