@@ -1,0 +1,15 @@
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        List<Integer> result = new ArrayList<Integer>();
+        for(int i : nums) {
+            map.put(i, map.getOrDefault(i,0)+1);
+        }
+        int s = nums.length/3;
+        for (Map.Entry entry : map.entrySet()) {
+            if((int)entry.getValue() > s)
+                result.add((int)entry.getKey());
+        }
+        return result;
+    }
+}
