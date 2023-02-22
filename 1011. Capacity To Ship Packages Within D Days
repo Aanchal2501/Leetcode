@@ -1,0 +1,42 @@
+class Solution {
+    public int shipWithinDays(int[] weights, int days) {
+        int ans = 0;
+        int l = weights[0], r = 0;
+        for(int i = 0; i < weights.length; i++) {
+            if(weights[i] > l) {
+            l = weights[i];
+            }
+            r = r + weights[i];
+        }
+        while(l<r) {
+            int mid = (l+r)/2;
+            if(possible(weights, mid, days)) {
+                r = mid;
+            }
+            else
+                l = mid+1;
+        }
+        return l;
+    }
+    static boolean possible(int[] arr, int mid, int days){
+        int n = arr.length;
+        int weight = 0;
+        int day = 1;
+        
+        for(int i = 0; i<n; i++){
+            if(arr[i] > mid)
+                return false;
+            
+            weight+=arr[i];
+            if(weight>mid){
+                day++;
+                weight = arr[i];
+            }
+            
+            if(day>days)
+                return false;
+        }
+        
+        return true;
+    }
+}
