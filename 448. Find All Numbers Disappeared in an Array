@@ -1,0 +1,32 @@
+class Solution {
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        Arrays.sort(nums);
+        List<Integer> disappear = new ArrayList<Integer>();
+        int k = 1, j=0;
+        int n = nums.length;
+        if(nums[0] > 1){
+           for(j = 1; j < nums[0]; j++)
+                disappear.add(j); 
+                 k = j;
+        }
+        for(int i = 0; i < nums.length; i++) {
+            if(k == nums[i]) {
+                continue;
+            }
+            else if(k+1 == nums[i] && k < n){
+                k++;
+            }
+            else if(k+1 < nums[i]){
+                for(j = k+1; j < nums[i]; j++)
+                disappear.add(j);
+                k = nums[i];
+            }
+        }
+        if(disappear.isEmpty() || nums[nums.length-1] < n){
+           for(j = k+1; j <= n; j++)
+                disappear.add(j);
+        }
+        return disappear;
+
+    }
+}
